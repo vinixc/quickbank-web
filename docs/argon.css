@@ -15144,6 +15144,11 @@ button.bg-lighter:focus
     background: linear-gradient(87deg, #2dce89 0, #2dcecc 100%) !important;
 }
 
+.bg-gradient-quickbank
+{
+    background: linear-gradient(87deg, #28b56f 0, #1ad176 100%) !important;
+}
+
 .bg-gradient-teal
 {
     background: linear-gradient(87deg, #11cdef 0, #1171ef 100%) !important;

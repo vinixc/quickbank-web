@@ -18,6 +18,10 @@ export class AuthService{
 
     authenticate(usuario:string,senha:string){
 
+      if(!usuario.startsWith('@')){
+        usuario = '@' + usuario;
+      }
+
         return this.http
             .post(API_URL,
                  {usuario,senha},
