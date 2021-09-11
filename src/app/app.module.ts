@@ -16,7 +16,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { AuthLayoutComponent } from './pages/login/layout/auth-layout.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { MensagemErroComponent } from './share/mensagem-erro/mensagem-erro.component';
+import { ModalEnviarComponent } from './share/modal-enviar/modal-enviar.component';
 
 
 @NgModule({
@@ -37,6 +37,7 @@ import { MensagemErroComponent } from './share/mensagem-erro/mensagem-erro.compo
     VMessageComponent,
     AdminLayoutComponent,
     AuthLayoutComponent
+
   ],
   providers: [],
   bootstrap: [AppComponent]

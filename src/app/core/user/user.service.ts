@@ -76,7 +76,7 @@ export class UserService{
         this.userSubject.next(user);
     }
 
-    public atualizaDadosUsuario(){
+    public findUserByFilterName(filtername : string) : Promise<any>{
       let usuario : UserImpl;
       this.getUser().subscribe(async user => {
         usuario = user;
@@ -86,16 +86,17 @@ export class UserService{
         headers: new HttpHeaders().set('Authorization','Bearer ' + usuario.token).set('Content-Type', 'application/json')
       };
 
-      this.http.get(`${API_CONSULTA_USUARIO}${usuario.filterName}`, options)
+      return this.http.get(`${API_CONSULTA_USUARIO}${filtername}`, options)
       .toPromise()
       .then(resp => {
         const userAtt = resp as UserImpl[];
 
+        let usuarioEncontrado : UserImpl;
         userAtt.forEach(u =>{
-          u.token = usuario.token
-          this.userSubject.next(u)
+          usuarioEncontrado = u as UserImpl;
         })
 
+        return {usuarioEncontrado};
 
       })
       .catch((err) => {
@@ -103,7 +104,30 @@ export class UserService{
           this.logout();
           this.router.navigate(['login'])
         }
+        throw err;
+      });
+    }
+
+    public atualizaDadosUsuario(){
+      let usuario : UserImpl;
+      this.getUser().subscribe(async user => {
+        usuario = user;
       });
 
+      this.findUserByFilterName(usuario.filterName).then(u => {
+
+        let usuarioEncontrado = u.usuarioEncontrado;
+        usuarioEncontrado.token = usuario.token;
+        this.userSubject.next(usuarioEncontrado);
+      }).catch(err => {
+        if(err.status === 401){
+          this.logout();
+          this.router.navigate(['login'])
+        }
+      })
+
+      const options = {
+        headers: new HttpHeaders().set('Authorization','Bearer ' + usuario.token).set('Content-Type', 'application/json')
+      };
     }
 }

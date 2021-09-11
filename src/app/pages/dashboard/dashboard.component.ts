@@ -57,9 +57,4 @@ export class DashboardComponent implements OnInit {
   calcPorcent(sourceValue : number, targetValue: number){
     return((sourceValue/targetValue)*100).toFixed(2);
   }
-
-  logout(){
-    this.userService.logout();
-    this.router.navigate(['login'])
-  }
 }

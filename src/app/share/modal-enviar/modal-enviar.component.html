@@ -1,0 +1,49 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Transferencia</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div>
+        <div class="form-group">
+          <label for="usuarioInput">Usuário</label>
+          <div class="input-group">
+            <input id="usuarioInput" class="form-control"  name="usuarioInput">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="valorInput">Valor</label>
+          <div class="input-group">
+            <input id="valorInput" class="form-control"  name="valorInput" type="number">
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-success w-100" (click)="modal.close('Save click')">Avançar</button>
+  </div>
+</ng-template>
+
+<div class="row">
+  <div class="col-12 padding-top">
+    <button class="btn btn-success col-sm-4 col-md-4 btn-menu-dashboard" type="button" (click)="open(content)">
+      <span class="btn-inner--icon"><i class="ni ni-bold-right"></i></span>
+      <span class="btn-inner--text" style="font-size: 11px;">Enviar</span>
+    </button>
+    <button class="btn btn-info col-sm-4 col-md-4 btn-menu-dashboard" type="button">
+      <span class="btn-inner--icon"><i class="ni ni-credit-card"></i></span>
+      <span class="btn-inner--text" style="font-size: 11px;">Carteira</span>
+    </button>
+
+    <button class="btn btn-danger col-sm-4 col-md-4 btn-menu-dashboard" type="button" (click)="logout()">
+      <span class="btn-inner--icon"><i class="ni ni-user-run"></i></span>
+      <span class="btn-inner--text" style="font-size: 11px;">Sair</span>
+    </button>
+  </div>
+</div>
+
+<hr>
