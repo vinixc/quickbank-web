@@ -16780,6 +16780,20 @@ a.text-lighter:focus
     align-items: center;
     justify-content: center;
 }
+.badge-circle-new
+{
+    font-size: .875rem;
+
+    width: 2rem;
+    height: 2rem;
+
+    text-align: center;
+
+    border-radius: 50%;
+
+    align-items: center;
+    justify-content: center;
+}
 
 .badge-dot
 {

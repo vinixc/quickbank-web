@@ -1,4 +1,3 @@
-import { ServicesModule } from './services/services.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -30,8 +29,7 @@ import { MensagemErroComponent } from './share/mensagem-erro/mensagem-erro.compo
     ComponentsModule,
     AppRoutingModule,
     LoginModule,
-    CommonModule,
-    ServicesModule
+    CommonModule
 
   ],
   declarations: [
