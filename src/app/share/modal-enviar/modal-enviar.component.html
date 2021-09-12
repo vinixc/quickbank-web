@@ -1,47 +1,90 @@
-<ng-template #content let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Transferencia</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form>
-      <div>
-        <div class="form-group">
+<p-dialog  [(visible)]="modalEnviar" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}" [modal]="true">
+  <ng-template pTemplate="header">
+    Transferência
+  </ng-template>
+  <form autocomplete="false" #formEnviar="ngForm">
+    <ap-mensagem-erro [mensagem]="mensagemError"></ap-mensagem-erro>
+    <div class="grid padding-top" *ngIf="!usuarioTargetObj && !mensagemSucesso">
+       <div class="col-12 p-fluid">
           <label for="usuarioInput">Usuário</label>
-          <div class="input-group">
-            <input id="usuarioInput" class="form-control"  name="usuarioInput">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="valorInput">Valor</label>
-          <div class="input-group">
-            <input id="valorInput" class="form-control"  name="valorInput" type="number">
-          </div>
-        </div>
+          <input pInputText id="usuarioInput" ngModel #usuarioInput="ngModel" class="form-control"  name="usuarioInput" required [(ngModel)]="usuarioTarget" (focus)="mensagemError = null">
+          <app-message [control]="usuarioInput.control" error="required" text="Informe um usuario"></app-message>
+       </div>
+
+       <div class="col-12 p-fluid">
+        <label>Valor</label>
+        <p-inputNumber mode="currency" [min]="1" placeholder="0,00" [minFractionDigits]="2" locale="pt-BR" currency="BRL" ngModel name="valor" #valor="ngModel" [required]="true" [(ngModel)]="valorEnvio" (focus)="mensagemError = null"></p-inputNumber>
+
+        <app-message [control]="valor.control" error="required" text="Informe o valor"></app-message>
+
       </div>
-    </form>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-success w-100" (click)="modal.close('Save click')">Avançar</button>
-  </div>
-</ng-template>
+
+      <div class="col-12 p-fluid padding-top">
+        <button pButton type="button" class="p-button-success p-button-rounded w-100" label="Avançar" [disabled]="formEnviar.invalid" (click)="avancarEnvio()"></button>
+
+      </div>
+
+
+    </div>
+
+    <div class="grid padding-top" *ngIf="usuarioTargetObj && !mensagemSucesso">
+      <p>Confirme os dados para prosseguir.</p>
+      <p>Usuário: {{usuarioTargetObj?.filterName}}</p>
+      <p>Nome: {{usuarioTargetObj?.name}}</p>
+      <p>CPF: {{usuarioTargetObj?.cpf}}</p>
+      <p>Valor: {{valorEnvio | currency:'BRL':true:'1.2-2'}}</p>
+
+
+
+
+
+
+     <div class="col-12 p-fluid padding-top">
+       <button pButton type="button" class="p-button-success p-button-rounded w-100" label="Transferir" [disabled]="formEnviar.invalid" (click)="transferir()"></button>
+     </div>
+     <div class="col-12 p-fluid padding-top">
+      <button pButton type="button" class="p-button-danger p-button-rounded w-100" label="Cancelar" [disabled]="formEnviar.invalid" (click)="cancelarEnvio()"></button>
+     </div>
+   </div>
+
+   <div class="grid padding-top" *ngIf="mensagemSucesso">
+    <p style="color: green;">{{mensagemSucesso}}</p>
+
+    <p>Usuário: {{usuarioTargetObj?.filterName}}</p>
+    <p>Nome: {{usuarioTargetObj?.name}}</p>
+    <p>CPF: {{usuarioTargetObj?.cpf}}</p>
+    <p>Valor: {{valorEnvio | currency:'BRL':true:'1.2-2'}}</p>
+
+    <div class="col-12 p-fluid padding-top">
+      <button pButton type="button" class="p-button-secondary p-button-rounded w-100" label="Sair" [disabled]="formEnviar.invalid" (click)="cancelarEnvio()"></button>
+    </div>
+
+ </div>
+
+  </form>
+</p-dialog>
+
 
 <div class="row">
   <div class="col-12 padding-top">
-    <button class="btn btn-success col-sm-4 col-md-4 btn-menu-dashboard" type="button" (click)="open(content)">
+    <button class="btn btn-success col-sm-3 col-md-3 btn-menu-dashboard" type="button" (click)="showDialogEnviar()">
       <span class="btn-inner--icon"><i class="ni ni-bold-right"></i></span>
-      <span class="btn-inner--text" style="font-size: 11px;">Enviar</span>
-    </button>
-    <button class="btn btn-info col-sm-4 col-md-4 btn-menu-dashboard" type="button">
-      <span class="btn-inner--icon"><i class="ni ni-credit-card"></i></span>
-      <span class="btn-inner--text" style="font-size: 11px;">Carteira</span>
+      <span class="txt-btn-principal">Enviar</span>
     </button>
 
-    <button class="btn btn-danger col-sm-4 col-md-4 btn-menu-dashboard" type="button" (click)="logout()">
+    <button class="btn btn-danger col-sm-3 col-md-3 btn-menu-dashboard" type="button">
+      <span class="btn-inner--icon"><i class="ni ni-credit-card"></i></span>
+      <span class="txt-btn-principal" >Carteira</span>
+    </button>
+
+    <button class="btn btn-primary col-sm-3 col-md-3 btn-menu-dashboard" type="button">
+      <span class="btn-inner--icon"><i class="ni ni-chart-bar-32"></i></span>
+      <span class="txt-btn-principal" >Invest</span>
+    </button>
+
+    <button class="btn btn-warning-two col-sm-3 col-md-3 btn-menu-dashboard" type="button" (click)="logout()">
       <span class="btn-inner--icon"><i class="ni ni-user-run"></i></span>
-      <span class="btn-inner--text" style="font-size: 11px;">Sair</span>
+      <span class="txt-btn-principal" >Sair</span>
     </button>
   </div>
 </div>

@@ -2,7 +2,7 @@ import { BodyReturnAuth } from "../token/return.token";
 import { User } from "./user";
 
 export class UserImpl implements User{
-        
+
     constructor(bodyReturn : BodyReturnAuth){
 
         if(bodyReturn !== null){
@@ -16,9 +16,9 @@ export class UserImpl implements User{
             this.saldo = bodyReturn.saldo;
             this.token = bodyReturn.token;
         }
-        
+
     }
-    
+
     _id: string;
     name: string;
     filterName: string;
@@ -28,5 +28,7 @@ export class UserImpl implements User{
     conta: string;
     saldo: number;
     token: string;
+
+
 
 }

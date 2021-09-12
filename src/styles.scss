@@ -288,6 +288,22 @@ a{
 }
 
 .btn-menu-dashboard{
-  width: 31% !important;
+  width: 23% !important;
   height: 63px !important;
+}
+
+.btn-warning-two
+{
+    color: #fff;
+    border-color: #c9bbbd;
+    background-color: #ffdc3d;
+    background: linear-gradient(to right, #edc200, #ffdc3d);
+    box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
+}
+
+.txt-btn-principal{
+  font-size: 10px !important;
+  float: left !important;
+  margin: 0 !important;
+  align-items: flex-start !important;
 }

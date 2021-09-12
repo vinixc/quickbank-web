@@ -1,7 +1,9 @@
+import { TransferenciaService } from './../../services/transferencia/transferencia.service';
+import { UserImpl } from './../../core/user/user.impl';
 import { UserService } from 'src/app/core/user/user.service';
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,28 +13,53 @@ import { Router } from '@angular/router';
 export class ModalEnviarComponent {
   closeResult = '';
 
-  constructor(private modalService: NgbModal, private userService :UserService,private router : Router) {}
+  modalEnviar: boolean = false;
 
-  open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-  }
+  @Input() usuarioTarget : string;
+  @Input() valorEnvio : number;
+  mensagemError: string = '';
+  mensagemSucesso: string = '';
+  usuarioTargetObj : UserImpl;
 
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
+
+  constructor(private modalService: NgbModal, private userService :UserService,private router : Router, private transferService: TransferenciaService) {}
+
+  showDialogEnviar(){
+    this.modalEnviar = true;
   }
 
   logout(){
     this.userService.logout();
     this.router.navigate(['login']);
+  }
+
+  avancarEnvio(){
+
+    this.userService.findUserByFilterName(this.usuarioTarget).then(result => {
+      this.usuarioTargetObj = result.usuarioEncontrado;
+    })
+    .catch(err => {
+      this.mensagemError = err.error.error;
+    });
+
+  }
+
+  cancelarEnvio(){
+    this.usuarioTarget = null;
+    this.usuarioTargetObj = null;
+    this.modalEnviar = false;
+    this.valorEnvio = null;
+    this.mensagemSucesso = null;
+    this.mensagemError = null;
+  }
+
+  transferir(){
+
+    this.transferService.trasferir(this.usuarioTargetObj.conta, this.valorEnvio).then(result =>{
+      this.mensagemSucesso = result;
+    })
+    .catch(err => {
+      this.mensagemError = err.error.error
+    })
   }
 }

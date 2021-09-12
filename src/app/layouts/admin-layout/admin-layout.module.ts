@@ -1,3 +1,5 @@
+import { MensagemErroComponent } from './../../share/mensagem-erro/mensagem-erro.component';
+import { MessageComponent } from './../../message/message.component';
 import { ModalEnviarComponent } from './../../share/modal-enviar/modal-enviar.component';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';import { RouterModule } from '@angular/router';
@@ -10,6 +12,14 @@ import { AdminLayoutRoutes } from './admin-layout.routing';
 import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
 import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {InputTextModule} from 'primeng/inputtext';
+import {DialogModule} from 'primeng/dialog';
+import {ButtonModule} from 'primeng/button';
+import {InputNumberModule} from 'primeng/inputnumber';
+import { MensagemErroModule } from 'src/app/share/mensagem-erro/mensagem-erro.module';
+
+
+
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -21,12 +31,19 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NgbModule,
     ClipboardModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    InputTextModule,
+    DialogModule,
+    ButtonModule,
+    InputNumberModule,
+    MensagemErroModule
   ],
   declarations: [
     DashboardComponent,
     UserProfileComponent,
-    ModalEnviarComponent
+    ModalEnviarComponent,
+    MessageComponent
+
   ]
 })
 

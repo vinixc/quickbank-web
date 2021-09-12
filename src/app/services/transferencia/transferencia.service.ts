@@ -10,6 +10,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 const API_URL_TRANSFER_BY_ID = URLs.BACKEND_PRODUCTION + '/expenses/';
+const API_URL_TRANSFERIR = URLs.BACKEND_PRODUCTION + '/saldo/Transfer';
 
 @Injectable({
   providedIn: 'root'
@@ -51,5 +52,21 @@ export class TransferenciaService {
           this.router.navigate(['login'])
         }
       });
+    }
+
+    trasferir(target_id : string, valor : number) : Promise<any>{
+
+      let usuario : UserImpl;
+      this.user$.subscribe(async user => {
+        usuario = user;
+      });
+      const obj = {conta: usuario.conta, contaDestino: target_id, valor, data: new Date()}
+
+      const options = {
+        headers: new HttpHeaders().set('Authorization','Bearer ' + usuario.token).set('Content-Type', 'application/json')
+      };
+
+      return this.http.put(API_URL_TRANSFERIR, JSON.stringify(obj),options).toPromise();
+
     }
 }
