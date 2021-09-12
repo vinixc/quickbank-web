@@ -116,7 +116,7 @@
             <div class="col-sm-6 col-md-6">
               <div class="row">
                 <div class="col-md-6 col-6"><label class="h5 text-white text-uppercase link-left"> Metas</label></div>
-                <div class="col-md-6 col-6"><a class="h5 text-white text-uppercase link-right" href="#">Criar meta</a></div>
+                <div class="col-md-6 col-6"><a class="h5 text-white text-uppercase link-right" (click)="modalCriarMeta = true">Criar meta</a></div>
               </div>
 
                 <div *ngFor="let g of goals" class="padding-top">
@@ -125,6 +125,47 @@
 
 
             </div>
+
+            <p-dialog  [(visible)]="modalCriarMeta" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}" [modal]="true">
+              <ng-template pTemplate="header">
+                <label *ngIf="!usuarioTargetObj && !mensagemSucesso" >Criar meta</label>
+              </ng-template>
+
+              <form autocomplete="false" #formCriarMeta="ngForm">
+                <ap-mensagem-erro [mensagem]="mensagemError"></ap-mensagem-erro>
+
+                <div class="grid padding-top">
+
+                  <p *ngIf="mensagemMetaCriada" style="color: green;">{{mensagemMetaCriada}}</p>
+
+                  <div class="col-12 p-fluid">
+                    <label for="nomeMetaInput">Nome</label>
+                    <input pInputText id="nomeMetaInput" ngModel #nomeMetaInput="ngModel" class="form-control"  name="nomeMetaInput" required minlength="3" [(ngModel)]="nomeMeta" (focus)="mensagemError = null" [disabled]="!!mensagemMetaCriada">
+                    <app-message [control]="nomeMetaInput.control" error="required" text="Informe o nome da meta"></app-message>
+                    <app-message [control]="nomeMetaInput.control" error="minlength" text="Informe pelo menos {{nomeMetaInput.errors?.minlength?.requiredLength}}"></app-message>
+                 </div>
+
+                 <div class="col-12 p-fluid">
+                  <label>Valor</label>
+                  <p-inputNumber mode="currency" [min]="1" placeholder="0,00" [minFractionDigits]="2" locale="pt-BR" currency="BRL" ngModel name="valor" #valor="ngModel" [required]="true" [(ngModel)]="valorMeta" (focus)="mensagemError = null" [disabled]="!!mensagemMetaCriada"></p-inputNumber>
+
+                  <app-message [control]="valor.control" error="required" text="Informe o valor"></app-message>
+
+                </div>
+
+                <div class="col-12 p-fluid padding-top" *ngIf="!mensagemMetaCriada">
+                  <button pButton type="button" class="p-button-success p-button-rounded w-100" label="Criar Meta" [disabled]="formCriarMeta.invalid" (click)="criarMeta()"></button>
+                </div>
+
+                <div class="col-12 p-fluid padding-top" *ngIf="mensagemMetaCriada">
+                  <button pButton type="button" class="p-button-secondary p-button-rounded w-100" label="Sair" [disabled]="formCriarMeta.invalid" (click)="finishCriarMeta()"></button>
+                </div>
+
+                </div>
+
+              </form>
+
+            </p-dialog>
 
         </div>
 

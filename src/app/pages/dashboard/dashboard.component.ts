@@ -21,6 +21,11 @@ export class DashboardComponent implements OnInit {
   public transferencias : Transferencia[] = [];
   public transferenciasResumo : Transferencia[] = [];
   public goals : Goal[] = [];
+  public modalCriarMeta : boolean = false;
+  public mensagemError : string = '';
+  public nomeMeta : string = '';
+  public valorMeta : number;
+  public mensagemMetaCriada: string = '';
 
   constructor(
     private userService: UserService,
@@ -60,5 +65,27 @@ export class DashboardComponent implements OnInit {
       this.transferenciasResumo = result.transferencias;
       this.transferenciasResumo = this.transferenciasResumo.slice(0,4);
     });
+  }
+
+  criarMeta(){
+
+    this.goalsService.criarMeta(this.nomeMeta,this.valorMeta).then((result) =>{
+      this.mensagemMetaCriada = 'Meta criada com sucesso!';
+      this.goalsService.getGoals().then(result => {
+        this.goals = result.goals;
+      })
+    })
+    .catch(err => {
+      this.mensagemError = err.error.error;
+    })
+
+  }
+
+  finishCriarMeta(){
+    this.modalCriarMeta = false;
+    this.nomeMeta = null;
+    this.valorMeta = null;
+    this.mensagemMetaCriada = null;
+    this.mensagemError = null;
   }
 }
