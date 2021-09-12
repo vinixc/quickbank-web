@@ -1,6 +1,6 @@
 import { MensagemErroModule } from 'src/app/share/mensagem-erro/mensagem-erro.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -13,13 +13,16 @@ import { VMessageComponent } from './share/vmessage/vmessage.component';
 import { LoginModule } from './pages/login/login.module';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
- import { CommonModule } from '@angular/common';
+ import { CommonModule, registerLocaleData } from '@angular/common';
 import { AuthLayoutComponent } from './pages/login/layout/auth-layout.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalEnviarComponent } from './share/modal-enviar/modal-enviar.component';
 import { MessageComponent } from './message/message.component';
 
+import localePt from '@angular/common/locales/pt';
+
+registerLocaleData(localePt);
 
 @NgModule({
   imports: [
@@ -42,7 +45,9 @@ import { MessageComponent } from './message/message.component';
     AuthLayoutComponent
 
   ],
-  providers: [],
+  providers: [{
+    provide: LOCALE_ID, useValue: 'pt-BR'
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
