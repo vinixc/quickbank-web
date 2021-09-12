@@ -1,4 +1,4 @@
-import { MensagemErroComponent } from './../../share/mensagem-erro/mensagem-erro.component';
+import { ShareModule } from './../../share/share.module';
 import { MessageComponent } from './../../message/message.component';
 import { ModalEnviarComponent } from './../../share/modal-enviar/modal-enviar.component';
 import { NgModule } from '@angular/core';
@@ -16,7 +16,6 @@ import {InputTextModule} from 'primeng/inputtext';
 import {DialogModule} from 'primeng/dialog';
 import {ButtonModule} from 'primeng/button';
 import {InputNumberModule} from 'primeng/inputnumber';
-import { MensagemErroModule } from 'src/app/share/mensagem-erro/mensagem-erro.module';
 
 
 
@@ -36,7 +35,7 @@ import { MensagemErroModule } from 'src/app/share/mensagem-erro/mensagem-erro.mo
     DialogModule,
     ButtonModule,
     InputNumberModule,
-    MensagemErroModule
+    ShareModule
   ],
   declarations: [
     DashboardComponent,

@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { UserImpl } from 'src/app/core/user/user.impl';
 import { UserService } from 'src/app/core/user/user.service';
 import { Router } from '@angular/router';
+import { Goal } from 'src/app/model/goal';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +20,7 @@ export class DashboardComponent implements OnInit {
   public mostraValor : boolean = false;
   public transferencias : Transferencia[] = [];
   public transferenciasResumo : Transferencia[] = [];
-  public goals : Transferencia[] = [];
+  public goals : Goal[] = [];
 
   constructor(
     private userService: UserService,
@@ -52,10 +53,6 @@ export class DashboardComponent implements OnInit {
       this.userService.atualizaDadosUsuario()
       this.mostraValor = true;
     }
-  }
-
-  calcPorcent(sourceValue : number, targetValue: number){
-    return((sourceValue/targetValue)*100).toFixed(2);
   }
 
   atualizarTransferencias(){

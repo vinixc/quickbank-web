@@ -1,4 +1,4 @@
-import { MensagemErroModule } from 'src/app/share/mensagem-erro/mensagem-erro.module';
+import { ShareModule } from './share/share.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -17,10 +17,9 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { AuthLayoutComponent } from './pages/login/layout/auth-layout.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { ModalEnviarComponent } from './share/modal-enviar/modal-enviar.component';
-import { MessageComponent } from './message/message.component';
 
 import localePt from '@angular/common/locales/pt';
+import { MetaComponent } from './share/meta/meta.component';
 
 registerLocaleData(localePt);
 
@@ -35,7 +34,7 @@ registerLocaleData(localePt);
     AppRoutingModule,
     LoginModule,
     CommonModule,
-    MensagemErroModule
+    ShareModule
 
   ],
   declarations: [
