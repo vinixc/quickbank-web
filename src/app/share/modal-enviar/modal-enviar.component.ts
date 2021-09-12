@@ -1,7 +1,7 @@
 import { TransferenciaService } from './../../services/transferencia/transferencia.service';
 import { UserImpl } from './../../core/user/user.impl';
 import { UserService } from 'src/app/core/user/user.service';
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
@@ -20,6 +20,8 @@ export class ModalEnviarComponent {
   mensagemError: string = '';
   mensagemSucesso: string = '';
   usuarioTargetObj : UserImpl;
+
+  @Output() transferenciaRealizada : any = new EventEmitter();
 
 
   constructor(private modalService: NgbModal, private userService :UserService,private router : Router, private transferService: TransferenciaService) {}
@@ -57,6 +59,7 @@ export class ModalEnviarComponent {
 
     this.transferService.trasferir(this.usuarioTargetObj.conta, this.valorEnvio).then(result =>{
       this.mensagemSucesso = result;
+      this.transferenciaRealizada.emit();
     })
     .catch(err => {
       this.mensagemError = err.error.error

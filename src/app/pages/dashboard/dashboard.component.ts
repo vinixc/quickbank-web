@@ -57,4 +57,11 @@ export class DashboardComponent implements OnInit {
   calcPorcent(sourceValue : number, targetValue: number){
     return((sourceValue/targetValue)*100).toFixed(2);
   }
+
+  atualizarTransferencias(){
+    this.transferenciaService.getTransferencias().then(result => {
+      this.transferenciasResumo = result.transferencias;
+      this.transferenciasResumo = this.transferenciasResumo.slice(0,4);
+    });
+  }
 }
