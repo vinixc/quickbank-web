@@ -65,12 +65,34 @@
         <div class="row padding-top">
             <!--Transfer-->
 
+
+
             <div class="col-sm-6">
 
               <div class="row">
 
               <div class="col-md-6 col-6"><label class="h5 text-white text-uppercase link-left"> Últimas transações</label></div>
-              <div class="col-md-6 col-6"><a class="h5 text-white text-uppercase link-right" href="#">Ver mais</a></div>
+              <div *ngIf="transferenciasResumo.length > 0" class="col-md-6 col-6"><a class="h5 text-white text-uppercase link-right" href="#">Ver mais</a></div>
+
+              </div>
+
+              <div *ngIf="transferenciasResumo.length < 1">
+                <div   class=" padding-top card card-stats mb-4 mb-xl-0">
+                  <div class="card-body">
+                    <div class="row ">
+
+                      <div class="col-auto">
+                        <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                          <i class="far fa-sad-cry"></i>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <h5 class="card-title text-uppercase text-muted mb-0">Nenhuma transação encontrada!</h5>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
 
               </div>
 
@@ -120,7 +142,27 @@
               </div>
 
                 <div *ngFor="let g of goals" class="padding-top">
-                  <app-meta [goal]="g"></app-meta>
+                  <app-meta [metaExcluida]="atualizarMetas()" [goal]="g"></app-meta>
+                </div>
+
+                <div *ngIf="goals.length < 1">
+                  <div   class=" padding-top card card-stats mb-4 mb-xl-0">
+                    <div class="card-body">
+                      <div class="row ">
+
+                        <div class="col-auto">
+                          <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                            <i class="fas fa-bullseye"></i>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <h5 class="card-title text-uppercase text-muted mb-0">Nenhuma meta cadastrada!</h5>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
 
 

@@ -9,6 +9,7 @@ import { Goal } from 'src/app/model/goal';
 
 const URL_API_CONSULTA_GOALS= URLs.BACKEND_PRODUCTION + '/goals/GetGoalsUser/';
 const URL_API_NOVA_META= URLs.BACKEND_PRODUCTION + '/goals/NewGoal';
+const URL_API_DELETAR_META = URLs.BACKEND_PRODUCTION + '/goals/DeleteGoal';
 
 @Injectable({
   providedIn: 'root'
@@ -65,5 +66,20 @@ export class GoalsService {
 
       return this.http.post(`${URL_API_NOVA_META}`, JSON.stringify(objEnvio), options).toPromise();
 
+    }
+
+    deletarMeta(_idMeta : string) : Promise<any>{
+      let usuario : UserImpl;
+      this.user$.subscribe(async user => {
+        usuario = user;
+      });
+
+      const objEnvio = {_id:_idMeta};
+      const options = {
+        headers: new HttpHeaders().set('Authorization','Bearer ' + usuario.token).set('Content-Type', 'application/json'),
+        body: objEnvio
+      };
+
+      return this.http.delete(URL_API_DELETAR_META, options).toPromise();
     }
 }

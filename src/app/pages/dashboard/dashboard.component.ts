@@ -81,6 +81,12 @@ export class DashboardComponent implements OnInit {
 
   }
 
+  atualizarMetas(){
+    this.goalsService.getGoals().then(result => {
+      this.goals = result.goals;
+    })
+  }
+
   finishCriarMeta(){
     this.modalCriarMeta = false;
     this.nomeMeta = null;

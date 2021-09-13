@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Goal } from 'src/app/model/goal';
+import { GoalsService } from './../../services/goals/goals.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-meta',
@@ -9,8 +9,9 @@ import { Goal } from 'src/app/model/goal';
 export class MetaComponent implements OnInit {
 
   @Input() goal : any;
+  @Output() metaExcluida : any = new EventEmitter();
 
-  constructor() { }
+  constructor(private goalsService : GoalsService) { }
 
   ngOnInit(): void {
   }
@@ -19,4 +20,8 @@ export class MetaComponent implements OnInit {
     return((sourceValue/targetValue)*100).toFixed(2);
   }
 
+  deletarMeta(){
+    this.goalsService.deletarMeta(this.goal._id);
+    this.metaExcluida.emit();
+  }
 }
