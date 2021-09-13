@@ -23,6 +23,8 @@ export class DashboardComponent implements OnInit {
   public goals : Goal[] = [];
   public modalCriarMeta : boolean = false;
   public modalAdicionameta : boolean = false;
+  public modalRetirarDeMeta : boolean = false;
+  public modalAttMeta : boolean = false;
   public mensagemError : string = '';
   public nomeMeta : string = '';
   public valorMeta : number;
@@ -104,6 +106,17 @@ export class DashboardComponent implements OnInit {
     this.modalAdicionameta = true;
   }
 
+  removerDeMeta(goal : any){
+    this.goalAlteracao = goal;
+    this.modalRetirarDeMeta = true;
+  }
+
+  attualizaMeta(goal : any){
+    this.goalAlteracao = goal;
+    this.nomeMeta = this.goalAlteracao.nameGoal;
+    this.modalAttMeta = true;
+  }
+
   atualizarMeta(){
     this.goalsService.depositar(this.goalAlteracao, this.valorAddMeta).then(result =>{
       this.mensagemMetaAtualizada = result;
@@ -114,10 +127,34 @@ export class DashboardComponent implements OnInit {
 
   }
 
+  retirarMeta(){
+    this.goalsService.retirar(this.goalAlteracao,this.valorAddMeta).then(result =>{
+      this.mensagemMetaAtualizada = result;
+    }).catch(err =>{
+      this.mensagemError = err.error.error;
+    });
+
+  }
+
+  attMeta(){
+    this.goalsService.attMeta(this.goalAlteracao,this.valorAddMeta).then(result =>{
+      this.mensagemMetaAtualizada = result;
+    }).catch(err =>{
+      this.mensagemError = err.error.error;
+    });
+  }
+
   finishAtualizarMeta(){
     this.modalAdicionameta = false;
+    this.modalRetirarDeMeta = false;
+    this.modalAttMeta = false;
     this.mensagemError = null;
     this.mensagemMetaAtualizada = null;
     this.valorAddMeta = null;
+    this.nomeMeta = null;
+
+    this.goalsService.getGoals().then(result => {
+      this.goals = result.goals;
+    })
    }
 }

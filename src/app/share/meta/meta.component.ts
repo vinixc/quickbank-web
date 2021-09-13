@@ -14,6 +14,8 @@ export class MetaComponent implements OnInit {
 
 
   @Output() mostraModalAdicionarMeta : any = new EventEmitter();
+  @Output() mostraModalRetirarMeta : any = new EventEmitter();
+  @Output() mostraModalAttMeta : any = new EventEmitter();
 
   constructor(private goalsService : GoalsService) { }
 
@@ -33,5 +35,13 @@ export class MetaComponent implements OnInit {
 
   mostraModal(){
     this.mostraModalAdicionarMeta.emit(this.goal);
+  }
+
+  mostraModalRetirar(){
+    this.mostraModalRetirarMeta.emit(this.goal);
+  }
+
+  mostraModalAttuMeta(){
+    this.mostraModalAttMeta.emit(this.goal);
   }
 }

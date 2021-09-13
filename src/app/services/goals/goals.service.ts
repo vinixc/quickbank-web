@@ -11,6 +11,8 @@ const URL_API_CONSULTA_GOALS= URLs.BACKEND_PRODUCTION + '/goals/GetGoalsUser/';
 const URL_API_NOVA_META= URLs.BACKEND_PRODUCTION + '/goals/NewGoal';
 const URL_API_DELETAR_META = URLs.BACKEND_PRODUCTION + '/goals/DeleteGoal';
 const URL_DEPOSITAR_GOALS = URLs.BACKEND_PRODUCTION + '/goals/TransferToGoal';
+const URL_REMOVER_GOALS = URLs.BACKEND_PRODUCTION + '/goals/RemoveValue';
+const URL_ATT_GOALS = URLs.BACKEND_PRODUCTION + '/goals/UpdateTargetValue';
 
 @Injectable({
   providedIn: 'root'
@@ -98,6 +100,40 @@ export class GoalsService {
       const objEnvio = {_id:goals._id,value: valorAdd, conta:usuario.conta};
 
       return this.http.put(URL_DEPOSITAR_GOALS, objEnvio, options).toPromise();
+
+    }
+
+    retirar(goals, valorAdd) : Promise<any>{
+
+      let usuario : UserImpl;
+      this.user$.subscribe(async user => {
+        usuario = user;
+      });
+
+      const options = {
+        headers: new HttpHeaders().set('Authorization','Bearer ' + usuario.token).set('Content-Type', 'application/json')
+      };
+
+      const objEnvio = {goalId:goals._id,valor: valorAdd, userId:usuario._id};
+
+      return this.http.post(URL_REMOVER_GOALS, objEnvio, options).toPromise();
+
+    }
+
+    attMeta(goals, valorAdd) : Promise<any>{
+
+      let usuario : UserImpl;
+      this.user$.subscribe(async user => {
+        usuario = user;
+      });
+
+      const options = {
+        headers: new HttpHeaders().set('Authorization','Bearer ' + usuario.token).set('Content-Type', 'application/json')
+      };
+
+      const objEnvio = {goalId:goals._id,valor: valorAdd};
+
+      return this.http.put(URL_ATT_GOALS, objEnvio, options).toPromise();
 
     }
 }
