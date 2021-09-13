@@ -1,5 +1,4 @@
 import { ShareModule } from './../../share/share.module';
-import { MessageComponent } from './../../message/message.component';
 import { ModalEnviarComponent } from './../../share/modal-enviar/modal-enviar.component';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';import { RouterModule } from '@angular/router';
@@ -40,8 +39,7 @@ import {InputNumberModule} from 'primeng/inputnumber';
   declarations: [
     DashboardComponent,
     UserProfileComponent,
-    ModalEnviarComponent,
-    MessageComponent
+    ModalEnviarComponent
 
   ]
 })

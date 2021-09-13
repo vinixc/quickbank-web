@@ -22,9 +22,11 @@
         </div>
       </div>
       <div>
+
         <div class="row col-12 md:col-12">
           <div class="col-3 md:col-3" >
-            <i class="ni ni-fat-add"></i><label style="font-size: 12px;font-weight: bold;">Deposito</label>
+            <button pButton pRipple type="button" icon="pi pi-arrow-circle-down"  class="p-button-rounded p-button-secondary" (click)="mostraModal()"></button>
+            <label style="font-size: 11px;">Depositar</label>
           </div>
           <div class="col-3 md:col-3" >
             <i class="ni ni-fat-delete"></i><label style="font-size: 12px;font-weight: bold">Retirar</label>
@@ -32,9 +34,10 @@
           <div class="col-3 md:col-3" >
             <i class="ni ni-active-40" ></i><label style="font-size: 12px;font-weight: bold">Alterar</label>
           </div>
+
           <div class="col-3 md:col-3">
             <a href="#" (click)="deletarMeta()">
-              <i class="fas fa-bullseye"></i>
+              <i class="ni ni-fat-remove"></i>
               <label style="font-size: 12px;font-weight: bold" >Excluir</label>
             </a>
 
@@ -46,3 +49,5 @@
     </div>
   </div>
 </div>
+
+

@@ -10,6 +10,10 @@ export class MetaComponent implements OnInit {
 
   @Input() goal : any;
   @Output() metaExcluida : any = new EventEmitter();
+  mensagemError : string = '';
+
+
+  @Output() mostraModalAdicionarMeta : any = new EventEmitter();
 
   constructor(private goalsService : GoalsService) { }
 
@@ -23,5 +27,11 @@ export class MetaComponent implements OnInit {
   deletarMeta(){
     this.goalsService.deletarMeta(this.goal._id);
     this.metaExcluida.emit();
+  }
+
+
+
+  mostraModal(){
+    this.mostraModalAdicionarMeta.emit(this.goal);
   }
 }

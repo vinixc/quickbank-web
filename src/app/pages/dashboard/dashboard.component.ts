@@ -22,10 +22,14 @@ export class DashboardComponent implements OnInit {
   public transferenciasResumo : Transferencia[] = [];
   public goals : Goal[] = [];
   public modalCriarMeta : boolean = false;
+  public modalAdicionameta : boolean = false;
   public mensagemError : string = '';
   public nomeMeta : string = '';
   public valorMeta : number;
   public mensagemMetaCriada: string = '';
+  mensagemMetaAtualizada : string = '';
+  valorAddMeta : number;
+  goalAlteracao : any;
 
   constructor(
     private userService: UserService,
@@ -94,4 +98,26 @@ export class DashboardComponent implements OnInit {
     this.mensagemMetaCriada = null;
     this.mensagemError = null;
   }
+
+  adicionarEmMeta(goal : any){
+    this.goalAlteracao = goal;
+    this.modalAdicionameta = true;
+  }
+
+  atualizarMeta(){
+    this.goalsService.depositar(this.goalAlteracao, this.valorAddMeta).then(result =>{
+      this.mensagemMetaAtualizada = result;
+
+    }).catch(err =>{
+      this.mensagemError = err.error.error;
+    });
+
+  }
+
+  finishAtualizarMeta(){
+    this.modalAdicionameta = false;
+    this.mensagemError = null;
+    this.mensagemMetaAtualizada = null;
+    this.valorAddMeta = null;
+   }
 }
