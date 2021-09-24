@@ -15,7 +15,8 @@
 
        <div class="col-12 p-fluid">
         <label>Valor</label>
-        <p-inputNumber mode="currency" [min]="1" placeholder="0,00" [minFractionDigits]="2" locale="pt-BR" currency="BRL" ngModel name="valor" #valor="ngModel" [required]="true" [(ngModel)]="valorEnvio" (focus)="mensagemError = null"></p-inputNumber>
+        <input type="number" pInputText placeholder="0,00" ngModel name="valor" #valor="ngModel" required="true" [(ngModel)]="valorEnvio" (focus)="mensagemError = null"/>
+
 
         <app-message [control]="valor.control" error="required" text="Informe o valor"></app-message>
 

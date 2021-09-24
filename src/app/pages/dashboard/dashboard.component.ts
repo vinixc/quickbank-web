@@ -67,6 +67,9 @@ export class DashboardComponent implements OnInit {
   }
 
   atualizarTransferencias(){
+    this.userService.atualizaDadosUsuario();
+    this.user$ = this.userService.getUser();
+
     this.transferenciaService.getTransferencias().then(result => {
       this.transferenciasResumo = result.transferencias;
       this.transferenciasResumo = this.transferenciasResumo.slice(0,4);
@@ -145,6 +148,7 @@ export class DashboardComponent implements OnInit {
   }
 
   finishAtualizarMeta(){
+
     this.modalAdicionameta = false;
     this.modalRetirarDeMeta = false;
     this.modalAttMeta = false;
@@ -156,5 +160,9 @@ export class DashboardComponent implements OnInit {
     this.goalsService.getGoals().then(result => {
       this.goals = result.goals;
     })
+
+    this.userService.atualizaDadosUsuario();
+
+    this.router.navigate(['dashboard'])
    }
 }

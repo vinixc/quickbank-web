@@ -1,3 +1,4 @@
+import { RegisterComponent } from './../../pages/register/register.component';
 import { ShareModule } from './../../share/share.module';
 import { ModalEnviarComponent } from './../../share/modal-enviar/modal-enviar.component';
 import { NgModule } from '@angular/core';
@@ -15,6 +16,9 @@ import {InputTextModule} from 'primeng/inputtext';
 import {DialogModule} from 'primeng/dialog';
 import {ButtonModule} from 'primeng/button';
 import {InputNumberModule} from 'primeng/inputnumber';
+import {BadgeModule} from 'primeng/badge';
+import {InputMaskModule} from 'primeng/inputmask';
+import {PasswordModule} from 'primeng/password';
 
 
 
@@ -34,12 +38,16 @@ import {InputNumberModule} from 'primeng/inputnumber';
     DialogModule,
     ButtonModule,
     InputNumberModule,
-    ShareModule
+    ShareModule,
+    BadgeModule,
+    InputMaskModule,
+    PasswordModule
   ],
   declarations: [
     DashboardComponent,
     UserProfileComponent,
-    ModalEnviarComponent
+    ModalEnviarComponent,
+    RegisterComponent
 
   ]
 })

@@ -193,7 +193,7 @@
 
                  <div class="col-12 p-fluid">
                   <label>Valor</label>
-                  <p-inputNumber mode="currency" [min]="1" placeholder="0,00" [minFractionDigits]="2" locale="pt-BR" currency="BRL" ngModel name="valor" #valor="ngModel" [required]="true" [(ngModel)]="valorMeta" (focus)="mensagemError = null" [disabled]="!!mensagemMetaCriada"></p-inputNumber>
+                  <input type="number" pInputText placeholder="0,00" ngModel name="valor" #valor="ngModel" required="true" [(ngModel)]="valorMeta" (focus)="mensagemError = null" [disabled]="!!mensagemMetaCriada"/>
 
                   <app-message [control]="valor.control" error="required" text="Informe o valor"></app-message>
 
@@ -227,7 +227,7 @@
                   <div class="col-12 p-fluid">
                     <label for="valorAdicionadoInput">Valor a ser adicionado</label>
 
-                    <p-inputNumber mode="currency" [min]="1" placeholder="0,00" [minFractionDigits]="2" locale="pt-BR" currency="BRL" ngModel name="valor" #valor="ngModel" [required]="true" [(ngModel)]="valorAddMeta" (focus)="mensagemError = null" [disabled]="!!mensagemMetaAtualizada"></p-inputNumber>
+                    <input type="number" pInputText placeholder="0,00" ngModel name="valor" #valor="ngModel" required="true" [(ngModel)]="valorAddMeta" (focus)="mensagemError = null" [disabled]="!!mensagemMetaAtualizada"/>
 
                     <app-message [control]="valor.control" error="required" text="Informe o valor"></app-message>
                  </div>
@@ -260,7 +260,7 @@
                   <div class="col-12 p-fluid">
                     <label for="valorAdicionadoInput">Valor a ser retirado</label>
 
-                    <p-inputNumber mode="currency" [min]="1" placeholder="0,00" [minFractionDigits]="2" locale="pt-BR" currency="BRL" ngModel name="valor" #valor="ngModel" [required]="true" [(ngModel)]="valorAddMeta" (focus)="mensagemError = null" [disabled]="!!mensagemMetaAtualizada"></p-inputNumber>
+                    <input type="number" pInputText placeholder="0,00" ngModel name="valor" #valor="ngModel" required="true" [(ngModel)]="valorAddMeta" (focus)="mensagemError = null" [disabled]="!!mensagemMetaAtualizada"/>
 
                     <app-message [control]="valor.control" error="required" text="Informe o valor"></app-message>
                  </div>
@@ -299,7 +299,8 @@
 
                    <div class="col-12 p-fluid">
                     <label>Valor</label>
-                    <p-inputNumber mode="currency" [min]="1" placeholder="0,00" [minFractionDigits]="2" locale="pt-BR" currency="BRL" ngModel name="valor" #valor="ngModel" [required]="true" [(ngModel)]="valorAddMeta" (focus)="mensagemError = null" [disabled]="!!mensagemMetaAtualizada"></p-inputNumber>
+
+                    <input type="number" pInputText placeholder="0,00" ngModel name="valor" #valor="ngModel" required="true" [(ngModel)]="valorAddMeta" (focus)="mensagemError = null" [disabled]="!!mensagemMetaAtualizada"/>
 
                     <app-message [control]="valor.control" error="required" text="Informe o valor"></app-message>
 

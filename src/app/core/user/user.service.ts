@@ -12,6 +12,7 @@ import { BodyReturnAuth } from "../token/return.token";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 const API_CONSULTA_USUARIO = URLs.BACKEND_PRODUCTION + '/accounts/GetUserFilterName/';
+const API_NEW_USER = URLs.BACKEND_PRODUCTION + '/accounts/NewUser';
 
 @Injectable({
     providedIn:"root"
@@ -129,5 +130,14 @@ export class UserService{
       const options = {
         headers: new HttpHeaders().set('Authorization','Bearer ' + usuario.token).set('Content-Type', 'application/json')
       };
+    }
+
+    public criarUsuario(nome: string, login: string, senha :string, cpf : string, email : string) : Promise<any>{
+
+      login = login.replace('@','');
+      const objEnvio = {name:nome,userFilter: login, senha,cpf,email};
+
+      return this.http.post(`${API_NEW_USER}`, objEnvio).toPromise();
+
     }
 }

@@ -3,8 +3,8 @@
     <div class="header-body text-center mb-7">
       <div class="row justify-content-center">
         <div class="col-lg-5 col-md-6">
-          <h1 class="text-white">Welcome!</h1>
-          <p class="text-lead text-light">Use these awesome forms to login or create new account in your project for free.</p>
+          <h1 class="text-white">Bem Vindo!</h1>
+
         </div>
       </div>
     </div>
@@ -21,61 +21,74 @@
   <div class="row justify-content-center">
     <div class="col-lg-6 col-md-8">
       <div class="card bg-secondary shadow border-0">
-        <div class="card-header bg-transparent pb-5">
-          <div class="text-muted text-center mt-2 mb-4"><small>Sign up with</small></div>
-          <div class="text-center">
-            <a href="javascript:void(0)" class="btn btn-neutral btn-icon mr-4">
-              <span class="btn-inner--icon"><img src="assets/img/icons/common/github.svg"></span>
-              <span class="btn-inner--text">Github</span>
-            </a>
-            <a href="javascript:void(0)" class="btn btn-neutral btn-icon">
-              <span class="btn-inner--icon"><img src="assets/img/icons/common/google.svg"></span>
-              <span class="btn-inner--text">Google</span>
-            </a>
-          </div>
-        </div>
         <div class="card-body px-lg-5 py-lg-5">
-          <div class="text-center text-muted mb-4">
-            <small>Or sign up with credentials</small>
-          </div>
-          <form role="form">
-            <div class="form-group">
-              <div class="input-group input-group-alternative mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
-                </div>
-                <input class="form-control" placeholder="Name" type="text">
+
+          <form autocomplete="false" #formNovoUsuario="ngForm">
+
+            <p style="color: green;" *ngIf="mensagemSucesso">
+              {{mensagemSucesso}}
+            </p>
+            <ap-mensagem-erro [mensagem]="mensagemError"></ap-mensagem-erro>
+
+              <div class="col-12 p-fluid">
+                <label for="inputTextNome">Nome</label>
+                <input pInputText id="inputTextNome" ngModel #nomeInput="ngModel" class="form-control"  name="inputTextNome" required minlength="3" [(ngModel)]="nome" [disabled]="!!mensagemSucesso">
+                <app-message [control]="nomeInput.control" error="required" text="Informe o nome"></app-message>
+                <app-message [control]="nomeInput.control" error="minlength" text="Informe pelo menos {{nomeInput.errors?.minlength?.requiredLength}} caracteres"></app-message>
               </div>
-            </div>
-            <div class="form-group">
-              <div class="input-group input-group-alternative mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="ni ni-email-83"></i></span>
-                </div>
-                <input class="form-control" placeholder="Email" type="email">
+
+              <div class="col-12 p-fluid">
+                <label for="inputTextNome">CPF</label>
+                <p-inputMask mask="999.999.999-99" placeholder="000.000.000-00" name="inputTextCPF" ngModel #cpfInput="ngModel" [required]="true" [minlength]="14" [(ngModel)]="cpf" [disabled]="!!mensagemSucesso"></p-inputMask>
+                <app-message [control]="cpfInput.control" error="required" text="Informe o CPF"></app-message>
+                <app-message [control]="cpfInput.control" error="minlength" text="Informe pelo menos {{cpfInput.errors?.minlength?.requiredLength}} caracteres"></app-message>
               </div>
-            </div>
-            <div class="form-group">
-              <div class="input-group input-group-alternative">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
-                </div>
-                <input class="form-control" placeholder="Password" type="password">
+
+              <div class="col-12 p-fluid">
+                <label for="inputTextUsuario">Usuario</label>
+                <input pInputText id="inputTextUsuario" ngModel #usuarioInput="ngModel" class="form-control"  name="inputTextUsuario" required minlength="3" [(ngModel)]="usuario" [disabled]="!!mensagemSucesso">
+                <app-message [control]="usuarioInput.control" error="required" text="Informe o nome de usuario"></app-message>
+                <app-message [control]="usuarioInput.control" error="minlength" text="Informe pelo menos {{usuarioInput.errors?.minlength?.requiredLength}} caracteres"></app-message>
               </div>
-            </div>
-            <div class="text-muted font-italic"><small>password strength: <span class="text-success font-weight-700">strong</span></small></div>
-            <div class="row my-4">
-              <div class="col-12">
-                <div class="custom-control custom-control-alternative custom-checkbox">
-                  <input class="custom-control-input" id="customCheckRegister" type="checkbox">
-                  <label class="custom-control-label" for="customCheckRegister">
-                    <span class="text-muted">I agree with the <a href="#!">Privacy Policy</a></span>
-                  </label>
-                </div>
+
+              <div class="col-12 p-fluid">
+                <label for="inputTextEmail">Email</label>
+                <input pInputText id="inputTextEmail" ngModel #emailInput="ngModel" class="form-control"  name="inputTextEmail" required minlength="5" [(ngModel)]="email" email [disabled]="!!mensagemSucesso">
+                <app-message [control]="emailInput.control" error="required" text="Informe o email"></app-message>
+                <app-message [control]="emailInput.control" error="email" text="Informe um email valido"></app-message>
               </div>
+
+              <div class="col-12 p-fluid">
+                <label for="inputTextSenha">Senha</label>
+                <p-password [(ngModel)]="senha" weakLabel="Que senha fraca ein!" mediumLabel="Você consegue melhorar" strongLabel="Booa! agora sim" promptLabel="Escolha sua senha" [disabled]="!!mensagemSucesso">
+
+                  <ng-template pTemplate="footer">
+                    <p-divider></p-divider>
+                    <p class="p-mt-2">Dica</p>
+                    <ul class="p-pl-2 p-ml-2 p-mt-0" style="line-height: 1.5">
+                        <li>
+                          Pelo menos uma minúscula
+                        </li>
+                        <li>Pelo menos uma maiúscula</li>
+                        <li>Pelo menos um numérico</li>
+                        <li>Pelo menos um caracter especial @#$%</li>
+                        <li>Mínimo 8 caracteres</li>
+                    </ul>
+                  </ng-template>
+
+                </p-password>
+              </div>
+
+
+            <div class="col-12 p-fluid padding-top">
+                <button pButton type="button" class="p-button-success p-button-rounded w-100" label="Criar conta" [disabled]="formNovoUsuario.invalid || invalidSenha() || !!mensagemSucesso" (click)="criarConta()"></button>
             </div>
-            <div class="text-center">
-              <button type="button" class="btn btn-primary mt-4">Create account</button>
+
+            <div class="row mt-3">
+
+              <div class="col-6 text-right">
+                <a href="javascript:void(0)" class="text-light" routerLink="/login"><small>Já possui conta?</small></a>
+              </div>
             </div>
           </form>
         </div>
