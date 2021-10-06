@@ -35,6 +35,10 @@ export class ModalEnviarComponent {
     this.router.navigate(['login']);
   }
 
+  invest(){
+    this.router.navigate(['invest']);
+  }
+
   avancarEnvio(){
 
     this.userService.findUserByFilterName(this.usuarioTarget).then(result => {

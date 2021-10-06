@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="header bg-gradient-quickbank pb-8 pt-5 pt-md-8">
+    <div class="container-fluid d-flex align-items-center">
+      <div class="row">
+        <div class="col-lg-7 col-md-10">
+          <h4 class="display-4 text-white">
+            <div *ngIf="(user$ | async) as user">
+              Olá {{user.name}}
+            </div>
+          </h4>
+          <p class="text-white mt-0 mb-5">Bem vindo ao QuickInvest, temos aqui alguns investimentos disponiveis para compra. Para mais detalhes sobre cada um deles acesse nossa plataforma digital.</p>
+          <!--<a href="#!" class="btn btn-info">Edit profile</a>-->
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="header-body">
+
+        <div class="row">
+          <div *ngIf="stoks.length < 1">
+            <div   class=" padding-top card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row ">
+
+                  <div class="col-auto">
+                    <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                      <i class="fas fa-bullseye"></i>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">Nenhum investimento disponivel!</h5>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div *ngFor="let stock of stoks" class="col-sm-4 col-md-4 padding-top">
+            <div class="card" style="width: 18rem;">
+              <img class="card-img-top" src="assets/img/theme/cobertura.jpg" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">{{stock.stockDisplayName}} - {{stock.propertyType}}</h5>
+
+                <div class="row" style="font-size: 12px;">
+                  <div class="col-4">
+                    <span>Progresso {{calcPorcent(stock.stockPrice + (stock.stockPrice * 10/ 1),stock.propertyMarketValue)}}%</span>
+                  </div>
+                  <div class="col-4">
+                    <span>Dividendo {{calcPorcent(stock.stockPrice + (stock.stockPrice * 10 / 2),stock.propertyMarketValue)}}%</span>
+                  </div>
+                  <div class="col-4">
+                    <span>Retorno {{calcPorcent(stock.stockPrice + (stock.stockPrice * 10 / 3),stock.propertyMarketValue)}}%</span>
+                  </div>
+                </div>
+                <button type="button" class="btn btn-success btn-sm w-100">Investir</button>
+              </div>
+              <div class="card-footer">
+                <h3 class="card-title ">{{stock.stockPrice | currency:'BRL':true:'1.2-2'}}/Ação</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

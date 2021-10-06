@@ -1,3 +1,4 @@
+import { InvestComponent } from './pages/invest/invest.component';
 import { NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
 import { BrowserModule  } from '@angular/platform-browser';
@@ -26,7 +27,8 @@ const routes: Routes =[
     redirectTo: 'dashboard'
   },
   { path: 'dashboard',      component: DashboardComponent },
-  { path: 'user-profile',   component: UserProfileComponent }
+  { path: 'user-profile',   component: UserProfileComponent },
+  { path: 'invest',   component: InvestComponent}
 ];
 
 @NgModule({
