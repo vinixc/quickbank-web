@@ -19,7 +19,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
 import localePt from '@angular/common/locales/pt';
-import { InvestComponent } from './pages/invest/invest.component';
 
 registerLocaleData(localePt);
 
@@ -41,8 +40,8 @@ registerLocaleData(localePt);
     AppComponent,
     VMessageComponent,
     AdminLayoutComponent,
-    AuthLayoutComponent,
-    InvestComponent
+    AuthLayoutComponent
+
 
   ],
   providers: [{

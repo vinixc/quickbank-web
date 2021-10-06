@@ -19,6 +19,8 @@ import {InputNumberModule} from 'primeng/inputnumber';
 import {BadgeModule} from 'primeng/badge';
 import {InputMaskModule} from 'primeng/inputmask';
 import {PasswordModule} from 'primeng/password';
+import { InvestComponent } from 'src/app/pages/invest/invest.component';
+import {DropdownModule} from 'primeng/dropdown';
 
 
 
@@ -41,13 +43,15 @@ import {PasswordModule} from 'primeng/password';
     ShareModule,
     BadgeModule,
     InputMaskModule,
-    PasswordModule
+    PasswordModule,
+    DropdownModule
   ],
   declarations: [
     DashboardComponent,
     UserProfileComponent,
     ModalEnviarComponent,
-    RegisterComponent
+    RegisterComponent,
+    InvestComponent
 
   ]
 })

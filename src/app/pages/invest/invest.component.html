@@ -8,7 +8,7 @@
               Olá {{user.name}}
             </div>
           </h4>
-          <p class="text-white mt-0 mb-5">Bem vindo ao QuickInvest, temos aqui alguns investimentos disponiveis para compra. Para mais detalhes sobre cada um deles acesse nossa plataforma digital.</p>
+          <p class="text-white mt-0 mb-5">Bem vindo ao QuickInvest, temos aqui alguns investimentos disponiveis. Para mais informações sobre cada um deles acesse nossa plataforma digital.</p>
           <!--<a href="#!" class="btn btn-info">Edit profile</a>-->
         </div>
       </div>
@@ -53,7 +53,7 @@
                     <span>Retorno {{calcPorcent(stock.stockPrice + (stock.stockPrice * 10 / 3),stock.propertyMarketValue)}}%</span>
                   </div>
                 </div>
-                <button type="button" class="btn btn-success btn-sm w-100">Investir</button>
+                <button type="button" class="btn btn-success btn-sm w-100" (click)="stok = stock">Investir</button>
               </div>
               <div class="card-footer">
                 <h3 class="card-title ">{{stock.stockPrice | currency:'BRL':true:'1.2-2'}}/Ação</h3>
@@ -66,3 +66,82 @@
     </div>
   </div>
 </div>
+
+
+<p-dialog  [(visible)]="stok" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}" [modal]="true" (onHide)="finishInvestimento()">
+  <ng-template pTemplate="header">
+    <label>Investindo em {{stok.stockDisplayName}} - {{stok.propertyType}}</label>
+  </ng-template>
+
+  <form autocomplete="false" #formInvestir="ngForm">
+    <ap-mensagem-erro [mensagem]="mensagemError"></ap-mensagem-erro>
+
+    <div class="grid padding-top" *ngIf="stok && !nextStepReview">
+      <div class="col-12 p-fluid">
+        <label>Quantidade de Ações</label>
+
+        <input type="number" pInputText placeholder="0" min="1" ngModel name="qtd" #qtd="ngModel" required="true" [(ngModel)]="quantidadeAcao" (focus)="mensagemError = null"/>
+        <app-message [control]="qtd.control" error="required" text="Informe a quantidade de acoes"></app-message>
+
+      </div>
+
+      <div class="col-12 p-fluid">
+
+        <div class="row" style="font-size: 12px;">
+          <div class="col-6">
+            <label>Valor</label><br>
+            <label>{{stok.stockPrice | currency:'BRL':true:'1.2-2' }}</label>
+          </div>
+          <div class="col-6">
+            <label>Total</label><br>
+            <label style="font-weight: bold;">{{stok.stockPrice * quantidadeAcao | currency:'BRL':true:'1.2-2' }}</label>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="col-12 p-fluid">
+
+        <label>Forma de Pagamento</label>
+        <p-dropdown [options]="optionsBuy" [(ngModel)]="optionBuy" placeholder="Selecione..." optionLabel="name" [showClear]="true"></p-dropdown>
+
+      </div>
+
+      <div class="col-12 p-fluid padding-top">
+        <button pButton type="button" class="p-button-success p-button-rounded w-100" label="Continuar" [disabled]="formInvestir.invalid || !optionBuy" (click)="nextStepReview = true"></button>
+      </div>
+
+      <div class="col-12 p-fluid padding-top">
+        <button pButton type="button" class="p-button-secondary p-button-rounded w-100" label="Sair" (click)="finishInvestimento()"></button>
+      </div>
+
+    </div>
+
+    <div class="grid padding-top" *ngIf="stok && nextStepReview">
+
+      <p *ngIf="!compraRealizada" style="color: red; font-size: 15px;margin-left: 10px;">ATENÇÃO</p><br/>
+      <p *ngIf="compraRealizada" style="color: green; font-size: 15px;margin-left: 10px;">COMPRA REALIZADA COM SUCESSO!</p><br/>
+
+      <p>
+        Você está obtendo <strong>{{quantidadeAcao}} {{quantidadeAcao <= 1 ? "ação" : "ações"}}</strong> da <strong>{{stok.stockDisplayName}}</strong> ao preço de <strong>{{stok.stockPrice | currency:'BRL':true:'1.2-2' }}</strong>.
+        O custo total será de <strong>{{stok.stockPrice * quantidadeAcao | currency:'BRL':true:'1.2-2' }}</strong>.
+        Confirme a operação para finalizar a compra.
+      </p>
+
+
+
+      <div class="col-12 p-fluid padding-top">
+        <button pButton type="button" class="p-button-success p-button-rounded w-100" label="Confirmar" [disabled]="formInvestir.invalid || !optionBuy || compraRealizada" (click)="realizaCompra()"></button>
+      </div>
+
+      <div class="col-12 p-fluid padding-top">
+        <button pButton type="button" class="p-button-secondary p-button-rounded w-100" label="Cancelar" (click)="finishInvestimento()"  [disabled]="compraRealizada"></button>
+      </div>
+
+
+    </div>
+
+  </form>
+
+</p-dialog>

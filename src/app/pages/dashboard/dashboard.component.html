@@ -110,10 +110,11 @@
                         </div>
                       </div>
                       <div class="col">
-                        <h5 class="card-title text-uppercase text-muted mb-0">Transferência</h5>
+                        <h5 class="card-title text-uppercase text-muted mb-0">{{transfer.categoria}}</h5>
 
                         <p *ngIf="transfer.valor > 0">Transferencia de {{transfer.targetUser}}</p>
-                        <p *ngIf="transfer.valor < 0">Transferencia para {{transfer.targetUser}}</p>
+                        <p *ngIf="transfer.valor < 0 && transfer.targetUser">Transferencia para {{transfer.targetUser}}</p>
+                        <p *ngIf="transfer.valor < 0 && !transfer.targetUser">{{transfer.descricao}}</p>
 
                       </div>
 
