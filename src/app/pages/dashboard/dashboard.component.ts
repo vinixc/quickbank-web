@@ -2,7 +2,6 @@ import { GoalsService } from './../../services/goals/goals.service';
 import { Transferencia } from './../../model/transferencia';
 import { TransferenciaService } from './../../services/transferencia/transferencia.service';
 import { Component, OnInit } from '@angular/core';
-import Chart from 'chart.js';
 import { Observable } from 'rxjs';
 import { UserImpl } from 'src/app/core/user/user.impl';
 import { UserService } from 'src/app/core/user/user.service';
