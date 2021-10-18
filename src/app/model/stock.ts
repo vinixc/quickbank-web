@@ -8,4 +8,5 @@ export interface Stock{
   zipCode : string;
   latitude : string;
   longitude : string;
+  imgs : [{}];
 }

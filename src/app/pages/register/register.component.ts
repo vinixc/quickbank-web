@@ -41,9 +41,9 @@ export class RegisterComponent implements OnInit {
         console.log(`SUCESSO ${result}`)
         this.mensagemSucesso = 'Conta registrada com sucesso! Em alguns segundos realize seu login!'
 
-        setInterval(()=>{
+        setTimeout(() =>{
           this.router.navigate(['login'])
-        }, 5000);
+        },5000);
 
       })
       .catch((err) =>{

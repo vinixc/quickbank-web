@@ -20,6 +20,11 @@ export class CarteiraComponent implements OnInit {
 
   constructor(private stockServices : StockServicesService) { }
 
+  selectData(e, legendItem, legend){
+    console.log(e,legendItem,legend)
+
+  }
+
   ngOnInit(): void {
 
     this.stockServices.getStocksByUser().then((res) => {

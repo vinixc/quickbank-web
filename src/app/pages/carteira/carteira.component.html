@@ -10,15 +10,35 @@
       </div>
     </div>
 
+    <div *ngIf="listStocks.length < 1">
+      <div   class=" padding-top card card-stats mb-4 mb-xl-0">
+        <div class="card-body">
+          <div class="row ">
 
-    <p-chart type="doughnut" [data]="data" [options]="chartOptions" [style]="{'width': '40%'}"></p-chart>
+            <div class="col-auto">
+              <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                <i class="fas fa-bullseye"></i>
+              </div>
+            </div>
+            <div class="col">
+              <h5 class="card-title text-uppercase text-muted mb-0">Nenhum investimento encontrado!</h5>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
 
 
-    <hr>
-      <strong style="margin-left: 35%;margin-right: 40%;font-size: 15;">{{totalEmAcoes | currency:'BRL':true:'1.2-2'}}</strong>
+    <p-chart *ngIf="listStocks.length > 0" type="doughnut" [data]="data" [options]="chartOptions" [style]="{'width': '40%'}"></p-chart>
+
+    <hr *ngIf="listStocks.length > 0">
+      <strong *ngIf="listStocks.length > 0" style="margin-left: 40%;margin-right: 40%;font-size: 15;">TOTAL:</strong><br>
+      <strong *ngIf="listStocks.length > 0" style="margin-left: 40%;margin-right: 40%;font-size: 15;">{{totalEmAcoes | currency:'BRL':true:'1.2-2'}}</strong>
     <hr><br>
 
-    <p-table responsiveLayout="scroll" [value]="listStocks" [paginator]="true" [rows]="5" [responsive]="true">
+    <p-table *ngIf="listStocks.length > 0" responsiveLayout="scroll" [value]="listStocks" [paginator]="true" [rows]="5" [responsive]="true">
       <ng-template pTemplate="header">
           <tr>
               <th>Investimento</th>
@@ -30,7 +50,7 @@
           <tr>
               <td>{{stock.stockDisplayName}}</td>
               <td>{{stock.numberOfStocks}}</td>
-              <td>{{stock.totalInvestment}}</td>
+              <td>{{stock.totalInvestment | currency:'BRL':true:'1.2-2'}}</td>
           </tr>
       </ng-template>
       <ng-template pTemplate="emptymessage">

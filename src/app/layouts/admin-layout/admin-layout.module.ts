@@ -1,3 +1,5 @@
+import { RecuperarSenhaComponent } from './../../pages/recuperar-senha/recuperar-senha.component';
+import { CarteiraComponent } from './../../pages/carteira/carteira.component';
 import { RegisterComponent } from './../../pages/register/register.component';
 import { ShareModule } from './../../share/share.module';
 import { ModalEnviarComponent } from './../../share/modal-enviar/modal-enviar.component';
@@ -21,7 +23,9 @@ import {InputMaskModule} from 'primeng/inputmask';
 import {PasswordModule} from 'primeng/password';
 import { InvestComponent } from 'src/app/pages/invest/invest.component';
 import {DropdownModule} from 'primeng/dropdown';
-
+import {ChartModule} from 'primeng/chart';
+import {TableModule} from 'primeng/table';
+import {CarouselModule} from 'primeng/carousel';
 
 
 // import { ToastrModule } from 'ngx-toastr';
@@ -44,15 +48,19 @@ import {DropdownModule} from 'primeng/dropdown';
     BadgeModule,
     InputMaskModule,
     PasswordModule,
-    DropdownModule
+    DropdownModule,
+    ChartModule,
+    TableModule,
+    CarouselModule
   ],
   declarations: [
     DashboardComponent,
     UserProfileComponent,
     ModalEnviarComponent,
     RegisterComponent,
-    InvestComponent
-
+    InvestComponent,
+    CarteiraComponent,
+    RecuperarSenhaComponent
   ]
 })
 

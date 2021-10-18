@@ -1,0 +1,56 @@
+<div class="header bg-gradient-quickbank py-7 py-lg-8">
+  <div class="container">
+    <div class="header-body text-center mb-7">
+      <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-6">
+          <h1 class="text-white">Esqueceu a senha?</h1>
+
+          <p class="text-white mt-0 mb-5">Insira o usuário associado à sua conta.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="separator separator-bottom separator-skew zindex-100">
+    <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
+    </svg>
+  </div>
+</div>
+<!-- Page content -->
+<div class="container mt--8 pb-5">
+  <!-- Table -->
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8">
+      <div class="card bg-secondary shadow border-0">
+        <div class="card-body px-lg-5 py-lg-5">
+
+          <form autocomplete="false" #formRecuperarSenha="ngForm">
+
+            <p style="color: green;" *ngIf="mensagemSucesso">
+              {{mensagemSucesso}}
+            </p>
+            <ap-mensagem-erro [mensagem]="mensagemError"></ap-mensagem-erro>
+
+              <div class="col-12 p-fluid">
+                <label for="inputTextNome">Usuario</label>
+                <input pInputText id="inputTextUsuario" ngModel #usuarioInput="ngModel" class="form-control"  name="inputTextUsuario" required minlength="3" [(ngModel)]="usuario" [disabled]="!!mensagemSucesso">
+                <app-message [control]="usuarioInput.control" error="required" text="Informe o usuario"></app-message>
+                <app-message [control]="usuarioInput.control" error="minlength" text="Informe pelo menos {{usuarioInput.errors?.minlength?.requiredLength}} caracteres"></app-message>
+              </div>
+
+              <div class="col-12 p-fluid padding-top">
+                <button pButton type="button" class="p-button-success p-button-rounded w-100" label="Recuperar Senha" [disabled]="formRecuperarSenha.invalid || !!mensagemSucesso" (click)="recuperarSenha()"></button>
+              </div>
+
+            <div class="row mt-3">
+
+              <div class="col-6 text-right">
+                <a href="javascript:void(0)" class="text-light" routerLink="/login"><small>Já possui conta?</small></a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -3,7 +3,6 @@ import { URLs } from 'src/app/share/constantes.enum';
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { TokenService } from "../token/token.service";
-import { User } from "./user";
 import { UserImpl } from "./user.impl";
 
 import jwt_decode from 'jwt-decode';
@@ -13,6 +12,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 const API_CONSULTA_USUARIO = URLs.BACKEND_PRODUCTION + '/accounts/GetUserFilterName/';
 const API_NEW_USER = URLs.BACKEND_PRODUCTION + '/accounts/NewUser';
+const API_RECUPERAR_SENHA = URLs.BACKEND_PRODUCTION + '/password/ResetPassword'
 
 @Injectable({
     providedIn:"root"
@@ -138,6 +138,15 @@ export class UserService{
       const objEnvio = {name:nome,userFilter: login, senha,cpf,email};
 
       return this.http.post(`${API_NEW_USER}`, objEnvio).toPromise();
+
+    }
+
+    public recuperarSenha(usuario: string) : Promise<any>{
+
+
+      const objEnvio = {user:usuario};
+
+      return this.http.post(`${API_RECUPERAR_SENHA}`, objEnvio).toPromise();
 
     }
 }

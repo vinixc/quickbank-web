@@ -32,15 +32,38 @@
 
     <div class="grid padding-top" *ngIf="usuarioTargetObj && !mensagemSucesso">
       <p>Confirme os dados para prosseguir.</p>
-      <p>Usuário: {{usuarioTargetObj?.filterName}}</p>
-      <p>Nome: {{usuarioTargetObj?.name}}</p>
-      <p>CPF: {{usuarioTargetObj?.cpf}}</p>
-      <p>Valor: {{valorEnvio | currency:'BRL':true:'1.2-2'}}</p>
 
+      <div class="row" >
 
+        <div class="col-6">
+          <span>Usuário:</span>
+        </div>
+        <div class="col-6">
+          <span>{{usuarioTargetObj?.filterName}}</span>
+        </div>
 
+        <div class="col-6">
+          <span>Nome:</span>
+        </div>
+        <div class="col-6">
+          <span>{{usuarioTargetObj?.name}}</span>
+        </div>
 
+        <div class="col-6">
+          <span>CPF:</span>
+        </div>
+        <div class="col-6">
+          <span>{{usuarioTargetObj?.cpf}}</span>
+        </div>
 
+        <div class="col-6">
+          <span>Valor:</span>
+        </div>
+        <div class="col-6">
+          <span>{{valorEnvio | currency:'BRL':true:'1.2-2'}}</span>
+        </div>
+
+      </div>
 
      <div class="col-12 p-fluid padding-top">
        <button pButton type="button" class="p-button-success p-button-rounded w-100" label="Transferir" [disabled]="formEnviar.invalid" (click)="transferir()"></button>
@@ -53,10 +76,37 @@
    <div class="grid padding-top" *ngIf="mensagemSucesso">
     <p style="color: green;">{{mensagemSucesso}}</p>
 
-    <p>Usuário: {{usuarioTargetObj?.filterName}}</p>
-    <p>Nome: {{usuarioTargetObj?.name}}</p>
-    <p>CPF: {{usuarioTargetObj?.cpf}}</p>
-    <p>Valor: {{valorEnvio | currency:'BRL':true:'1.2-2'}}</p>
+    <div class="row" >
+
+      <div class="col-6">
+        <span>Usuário:</span>
+      </div>
+      <div class="col-6">
+        <span>{{usuarioTargetObj?.filterName}}</span>
+      </div>
+
+      <div class="col-6">
+        <span>Nome:</span>
+      </div>
+      <div class="col-6">
+        <span>{{usuarioTargetObj?.name}}</span>
+      </div>
+
+      <div class="col-6">
+        <span>CPF:</span>
+      </div>
+      <div class="col-6">
+        <span>{{usuarioTargetObj?.cpf}}</span>
+      </div>
+
+      <div class="col-6">
+        <span>Valor:</span>
+      </div>
+      <div class="col-6">
+        <span>{{valorEnvio | currency:'BRL':true:'1.2-2'}}</span>
+      </div>
+
+    </div>
 
     <div class="col-12 p-fluid padding-top">
       <button pButton type="button" class="p-button-secondary p-button-rounded w-100" label="Sair" [disabled]="formEnviar.invalid" (click)="cancelarEnvio()"></button>
@@ -75,7 +125,7 @@
       <span class="txt-btn-principal" style="font-size: 10px;">Enviar</span>
     </button>
 
-    <button class="btn btn-danger col-sm-3 col-md-3 btn-menu-dashboard" type="button">
+    <button class="btn btn-danger col-sm-3 col-md-3 btn-menu-dashboard" type="button" (click)="carteira()">
       <span class="btn-inner--icon"><i class="ni ni-credit-card"></i></span>
       <span class="txt-btn-principal"  style="font-size: 10px;">Carteira</span>
     </button>

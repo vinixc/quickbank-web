@@ -41,8 +41,6 @@ registerLocaleData(localePt);
     VMessageComponent,
     AdminLayoutComponent,
     AuthLayoutComponent
-
-
   ],
   providers: [{
     provide: LOCALE_ID, useValue: 'pt-BR'

@@ -39,6 +39,10 @@ export class ModalEnviarComponent {
     this.router.navigate(['invest']);
   }
 
+  carteira(){
+    this.router.navigate(['carteira']);
+  }
+
   avancarEnvio(){
 
     this.userService.findUserByFilterName(this.usuarioTarget).then(result => {

@@ -36,9 +36,14 @@
             </div>
 
           </div>
-          <div *ngFor="let stock of stoks" class="col-sm-4 col-md-4 padding-top">
-            <div class="card" style="width: 18rem;">
-              <img class="card-img-top" src="assets/img/theme/cobertura.jpg" alt="Card image cap">
+          <div *ngFor="let stock of stoks" class="col-sm-12 col-md-4 padding-top w-100" style="margin: 5px;">
+            <div class="card w-100">
+              <p-carousel [value]="stock.imgs" [numVisible]="1" [numScroll]="1" style="width: 100% !important;height: 100% !important;" class="card-img-top">
+                <ng-template let-img pTemplate="item">
+                  <img src="{{getImagemByChave(img.chave)}}" alt="Card image cap" style="width: 100%;height: 100%;" (click)="stok = stock">
+                </ng-template>
+            </p-carousel>
+
               <div class="card-body">
                 <h5 class="card-title">{{stock.stockDisplayName}} - {{stock.propertyType}}</h5>
 

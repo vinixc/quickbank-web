@@ -1,3 +1,5 @@
+import { RecuperarSenhaComponent } from './../../pages/recuperar-senha/recuperar-senha.component';
+import { CarteiraComponent } from './../../pages/carteira/carteira.component';
 import { RegisterComponent } from './../../pages/register/register.component';
 import { Routes } from '@angular/router';
 
@@ -9,6 +11,8 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
     { path: 'user-profile',   component: UserProfileComponent },
     { path: 'register',   component: RegisterComponent },
-    { path: 'invest',   component: InvestComponent}
+    { path: 'forgot_password',   component: RecuperarSenhaComponent },
+    { path: 'invest',   component: InvestComponent},
+    { path: 'carteira',   component: CarteiraComponent}
 
 ];

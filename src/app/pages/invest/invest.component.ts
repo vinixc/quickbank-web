@@ -1,3 +1,4 @@
+import { async } from '@angular/core/testing';
 import { OptionsBuyInvest } from './../../model/options-buy-invest';
 import { UserService } from './../../core/user/user.service';
 import { Component, OnInit } from '@angular/core';
@@ -24,6 +25,9 @@ export class InvestComponent implements OnInit {
   public optionBuy : OptionsBuyInvest;
   public nextStepReview : boolean = false;
   public compraRealizada : boolean = false;
+
+  public imgs = [{img:"https://fileserverquickbank.brazilsouth.cloudapp.azure.com/api/Arquivo/GetViewFile/ad5aa774-cbce-493b-9dff-89e988a57548"},
+  {img:"https://fileserverquickbank.brazilsouth.cloudapp.azure.com/api/Arquivo/GetViewFile/ad5aa774-cbce-493b-9dff-89e988a57548"}];
 
 
   constructor(
@@ -52,6 +56,14 @@ export class InvestComponent implements OnInit {
     this.stockService.getStocks().then((res) => {
       this.stoks = res.stoks;
       this.stoks = this.stoks.sort((a,b) => a.stockPrice - b.stockPrice)
+
+      this.stoks.forEach(st =>{
+        this.stockService.getImagesAcao(st._id).then(res => {
+          if(res != null &&  res.imgs != null){
+            st.imgs = res.imgs;
+          }
+        });
+      });
     })
   }
 
@@ -73,5 +85,15 @@ export class InvestComponent implements OnInit {
       console.log(err.error.error);
       this.mensagemError = err.error.error;
     });
+  }
+
+
+  getImagemByChave(chave){
+    if(chave != null){
+
+      return  this.stockService.getImagesAcaoChave(chave);
+    }else{
+      return "assets/img/theme/cobertura.jpg";
+    }
   }
 }
