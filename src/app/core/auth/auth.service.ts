@@ -3,8 +3,9 @@ import { Injectable } from "@angular/core";
 import { UserService } from "../user/user.service";
 import { tap } from "rxjs/operators";
 import { BodyReturnAuth } from "../token/return.token";
+import { URLs } from "src/app/share/constantes.enum";
 
-const API_URL = 'https://api-quick-bank-desenvolvimento.herokuapp.com/login/';
+const API_URL = URLs.BACKEND_PRODUCTION + '/login/';
 
 @Injectable({
     providedIn:"root"

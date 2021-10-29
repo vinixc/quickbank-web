@@ -19,6 +19,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
 import localePt from '@angular/common/locales/pt';
+import { TransferenciasComponent } from './pages/transferencias/transferencias.component';
 
 registerLocaleData(localePt);
 
@@ -40,7 +41,8 @@ registerLocaleData(localePt);
     AppComponent,
     VMessageComponent,
     AdminLayoutComponent,
-    AuthLayoutComponent
+    AuthLayoutComponent,
+    TransferenciasComponent
   ],
   providers: [{
     provide: LOCALE_ID, useValue: 'pt-BR'

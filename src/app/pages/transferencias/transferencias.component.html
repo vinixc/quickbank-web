@@ -1,0 +1,60 @@
+<div class="container">
+
+  <div *ngIf="transferencias.length < 1">
+    <div   class=" padding-top card card-stats mb-4 mb-xl-0">
+      <div class="card-body">
+        <div class="row ">
+
+          <div class="col-auto">
+            <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+              <i class="far fa-sad-cry"></i>
+            </div>
+          </div>
+          <div class="col">
+            <h5 class="card-title text-uppercase text-muted mb-0">Nenhuma transação encontrada!</h5>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div *ngFor="let transfer of transferencias" class="padding-top">
+    <div  class="card card-stats mb-4 mb-xl-0">
+      <div class="card-body">
+        <div class="row ">
+          <div class="col-auto">
+
+            <div *ngIf="transfer.valor < 0" class="icon icon-shape text-white rounded-circle shadow bg-danger" >
+              <i class="fas fa-star"></i>
+            </div>
+            <div *ngIf="transfer.valor > 0" class="icon icon-shape text-white rounded-circle shadow bg-info" >
+              <i class="fas fa-star"></i>
+            </div>
+          </div>
+          <div class="col">
+            <h5 class="card-title text-uppercase text-muted mb-0">{{transfer.categoria}}</h5>
+
+            <p *ngIf="transfer.valor > 0">Transferencia de {{transfer.targetUser}}</p>
+            <p *ngIf="transfer.valor < 0 && transfer.targetUser">Transferencia para {{transfer.targetUser}}</p>
+            <p *ngIf="transfer.valor < 0 && !transfer.targetUser">{{transfer.descricao}}</p>
+
+          </div>
+
+          <div class="col-auto">
+            <div>
+              {{transfer.data | date:'dd/MM/y'}}
+            </div>
+            <div [ngStyle]="{color: transfer.valor  < 0 ? 'red' : '#11cdef'}">
+              {{transfer.valor | currency:'BRL':true:'1.2-2'}}
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+ </div>
+
+

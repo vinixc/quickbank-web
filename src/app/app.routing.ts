@@ -1,3 +1,4 @@
+import { TransferenciasComponent } from './pages/transferencias/transferencias.component';
 import { RecuperarSenhaComponent } from './pages/recuperar-senha/recuperar-senha.component';
 import { InvestComponent } from './pages/invest/invest.component';
 import { NgModule } from '@angular/core';
@@ -30,6 +31,7 @@ const routes: Routes =[
   },
   { path: 'dashboard',      component: DashboardComponent },
   { path: 'user-profile',   component: UserProfileComponent },
+  { path: 'transferencias',   component: TransferenciasComponent },
   { path: 'invest',   component: InvestComponent},
   { path: 'carteira',   component: CarteiraComponent}
 ];

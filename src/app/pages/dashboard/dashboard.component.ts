@@ -36,24 +36,10 @@ export class DashboardComponent implements OnInit {
     private userService: UserService,
     private transferenciaService : TransferenciaService,
     private goalsService : GoalsService,
-    private router : Router){
-
-    userService.atualizaDadosUsuario();
-    this.user$ = userService.getUser();
-
-    //this.transferencias = this.transferenciaService.getTransferencias();
-    this.transferenciaService.getTransferencias().then(result => {
-      this.transferenciasResumo = result.transferencias;
-      this.transferenciasResumo = this.transferenciasResumo.slice(0,4);
-    });
-
-    this.goalsService.getGoals().then(result => {
-      this.goals = result.goals;
-    })
-  }
+    private router : Router){}
 
   ngOnInit() {
-
+    this.reloadDashBoard();
   }
 
   mostrarValorOculto(){
@@ -163,5 +149,20 @@ export class DashboardComponent implements OnInit {
     this.userService.atualizaDadosUsuario();
 
     this.router.navigate(['dashboard'])
+   }
+
+   reloadDashBoard(){
+    this.userService.atualizaDadosUsuario();
+    this.user$ = this.userService.getUser();
+
+    //this.transferencias = this.transferenciaService.getTransferencias();
+    this.transferenciaService.getTransferencias().then(result => {
+      this.transferenciasResumo = result.transferencias;
+      this.transferenciasResumo = this.transferenciasResumo.slice(0,4);
+    });
+
+    this.goalsService.getGoals().then(result => {
+      this.goals = result.goals;
+    })
    }
 }

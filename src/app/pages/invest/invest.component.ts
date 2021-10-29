@@ -26,10 +26,6 @@ export class InvestComponent implements OnInit {
   public nextStepReview : boolean = false;
   public compraRealizada : boolean = false;
 
-  public imgs = [{img:"https://fileserverquickbank.brazilsouth.cloudapp.azure.com/api/Arquivo/GetViewFile/ad5aa774-cbce-493b-9dff-89e988a57548"},
-  {img:"https://fileserverquickbank.brazilsouth.cloudapp.azure.com/api/Arquivo/GetViewFile/ad5aa774-cbce-493b-9dff-89e988a57548"}];
-
-
   constructor(
 
     private userService : UserService,
@@ -59,8 +55,11 @@ export class InvestComponent implements OnInit {
 
       this.stoks.forEach(st =>{
         this.stockService.getImagesAcao(st._id).then(res => {
-          if(res != null &&  res.imgs != null){
+          console.log(st._id, res);
+          if(res != null &&  res.imgs != null && res.imgs.length >= 1){
             st.imgs = res.imgs;
+          }else{
+            st.imgs = [{chave: null}];
           }
         });
       });

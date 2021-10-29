@@ -32,6 +32,7 @@ export class UserService{
     }
 
     setToken(token : string,bodyReturn: BodyReturnAuth){
+        console.log(token);
         this.tokenService.setToken(token);
         console.log(`ADICIONANDO TOKEN ${bodyReturn._id}`)
         this.decodeAndNotifyForBody(bodyReturn);
