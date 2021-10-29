@@ -40,6 +40,10 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.reloadDashBoard();
+
+    setInterval(() => {
+      this.reloadDashBoard();
+    }, 10000)
   }
 
   mostrarValorOculto(){
